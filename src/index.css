@@ -1,0 +1,225 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Playfair+Display:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 10%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 10%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 10%;
+
+    /* VesPlus-inspired primary blue */
+    --primary: 214 100% 46%;
+    --primary-foreground: 0 0% 100%;
+
+    /* brand blues */
+    --brand-blue: 214 90% 52%;
+    --brand-blue-light: 214 90% 62%;
+    --brand-blue-dark: 214 90% 40%;
+
+    /* keep orange for accents */
+    --brand-orange: 30 100% 45%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 0 0% 96%;
+    --secondary-foreground: 0 0% 10%;
+
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 45%;
+
+    --accent: 30 100% 45%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 0 0% 90%;
+    --input: 0 0% 90%;
+    --ring: 30 100% 45%;
+
+    --radius: 0.5rem;
+    
+    --brand-orange: 30 100% 45%;
+    --brand-orange-light: 30 100% 55%;
+    --brand-orange-dark: 30 100% 35%;
+    
+    --text-dark: 220 13% 16%;
+    --text-light: 220 7% 45%;
+    --text-lighter: 220 6% 65%;
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 0 0% 10%;
+    --foreground: 0 0% 95%;
+
+    --card: 0 0% 10%;
+    --card-foreground: 0 0% 95%;
+
+    --popover: 0 0% 10%;
+    --popover-foreground: 0 0% 95%;
+
+    --primary: 214 100% 40%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 0 0% 15%;
+    --secondary-foreground: 0 0% 95%;
+
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 65%;
+
+    --accent: 30 100% 45%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 95%;
+
+    --border: 0 0% 20%;
+    --input: 0 0% 20%;
+    --ring: 30 100% 45%;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-korean;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif;
+  }
+}
+
+@layer components {
+  /* CSS-only typewriter effect
+     Usage (JSX):
+     <span className="typewriter" style={{ ['--w' as any]: '15ch', ['--chars' as any]: 15 } as any}>Your Text</span>
+
+     - --w: the final width in ch units (matches the char count)
+     - --chars: number of characters (used for steps and timing)
+  */
+
+  .typewriter {
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    line-height: 1.2;
+    /* Keep the final width after typing using forwards fill-mode */
+    animation: typing calc(var(--chars, 15) * 0.08s) steps(var(--chars, 15), end) forwards;
+    width: 0; /* animated to --w */
+  }
+
+  @keyframes typing {
+    from { width: 0; }
+    to { width: var(--w, 20ch); }
+  }
+
+  @keyframes blink-caret {
+    from, to { border-color: transparent; }
+    50% { border-color: currentColor; }
+  }
+}
+
+/* General animation utilities used by Reveal and other elements */
+@layer utilities {
+  .animate-fade-in {
+    animation: fadeIn 700ms ease forwards;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .stagger > * {
+    transition: opacity .6s ease, transform .6s ease;
+  }
+
+  /* New animations added for hero and floating accents */
+  .animate-floating {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0% { transform: translateY(0) translateX(0); }
+    50% { transform: translateY(-10px) translateX(6px); }
+    100% { transform: translateY(0) translateX(0); }
+  }
+
+  /* Parallax slow background pan */
+  .parallax-bg {
+    background-position: center center;
+    animation: backgroundPan 25s linear infinite;
+  }
+
+  @keyframes backgroundPan {
+    0% { background-position: center 40%; }
+    50% { background-position: center 60%; }
+    100% { background-position: center 40%; }
+  }
+
+  /* Stagger helpers: apply small delays via inline style */
+  .stagger-child {
+    opacity: 0;
+    transform: translateY(12px);
+    transition: transform .5s cubic-bezier(.2,.9,.2,1), opacity .5s cubic-bezier(.2,.9,.2,1);
+    transition-delay: var(--delay, 0s);
+    will-change: transform, opacity;
+  }
+
+  .stagger-child.revealed {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Respect reduced motion preferences */
+  @media (prefers-reduced-motion: reduce) {
+    .animate-fade-in,
+    .animate-floating,
+    .parallax-bg,
+    .stagger-child {
+      animation: none !important;
+      transition: none !important;
+      transform: none !important;
+      opacity: 1 !important;
+    }
+  }
+}
